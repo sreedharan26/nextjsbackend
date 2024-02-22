@@ -29,11 +29,11 @@ const getArtists = (table1) => {
 }
 
 export async function GET(req, res) {
-    try {
+    // try {
         const data = await getArtists(table1);
         return NextResponse.json(data);
-    } catch (e) {
-        console.error(e);
-        return NextResponse.error(new Error(e.message));
-    }
+    // } catch (e) {
+        // console.error(e);
+        // return NextResponse.error(new Error(e.message));
+    // }
 }
