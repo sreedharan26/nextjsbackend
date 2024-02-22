@@ -30,7 +30,7 @@ const getArtists = (table1) => {
 
 export async function GET(req, res) {
     try {
-        const data = await getQuotes(table1);
+        const data = await getArtists(table1);
         return NextResponse.json(data);
     } catch (e) {
         console.error(e);
