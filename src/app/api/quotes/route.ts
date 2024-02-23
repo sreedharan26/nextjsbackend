@@ -40,6 +40,6 @@ export async function GET (request: NextRequest){
     // const response = NextResponse.next()
     // response.cookies.set('error', `${e}`)
     // return response
-    return NextResponse.json({message : "Something went wrong"})
+    return NextResponse.json({message : `${e}`})
 }
 }
