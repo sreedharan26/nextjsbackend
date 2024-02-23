@@ -33,8 +33,8 @@ export async function GET(req, res) {
     try {
         const data = await getQuotes(table1);
         return NextResponse.json(data);
-    } catch (e) {
-        console.error(e);
-        return NextResponse.error(new Error(e.message));
+    }catch{
+        // console.error(e);
+        return NextResponse.error("Something went wrong");
     }
 }
