@@ -35,8 +35,10 @@ export async function GET (request: NextRequest){
   try {
     const data = await getQuotes(table1);
     return NextResponse.json(data);
-  }catch{
+  }catch(e){
     // console.error(e);
-    return NextResponse.error();
+    const response = NextResponse.next()
+    response.cookies.set('error', `${e}`)
+    return response
 }
 }
