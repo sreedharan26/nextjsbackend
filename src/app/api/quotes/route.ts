@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
-import Airtable from 'airtable'
+import {NextRequest, NextResponse} from "next/server";
+import Airtable, { FieldSet, Table } from 'airtable'
 
 const base = new Airtable({apiKey: process.env.API_KEY_ODB}).base('app5C3EKxBArX6f00')
 const table1 = base('Visionary voices');
 
-const getQuotes = (table1) => {
+const getQuotes = (table1: Table<FieldSet>) => {
 
     return new Promise((resolve, reject) => {
         table1 && table1.select({
@@ -15,7 +15,7 @@ const getQuotes = (table1) => {
                 console.error(err);
                 reject(err);
             } else {
-                const data = records.map(record => ({
+                const data = records?.map(record => ({
                     id: record.id,
                     name: record.get('author name'),
                     image: record.get('Author Headshots'),
@@ -28,13 +28,13 @@ const getQuotes = (table1) => {
     });
 }
 
-export async function GET(req, res) {
 
-    try {
-        const data = await getQuotes(table1);
-        return NextResponse.json(data);
-    }catch{
-        // console.error(e);
-        return NextResponse.error("Something went wrong");
-    }
+export async function GET (request: NextRequest){
+  try {
+    const data = await getQuotes(table1);
+    return NextResponse.json(data);
+  }catch{
+    // console.error(e);
+    return NextResponse.error();
+}
 }
