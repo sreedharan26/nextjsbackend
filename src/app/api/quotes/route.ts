@@ -32,11 +32,11 @@ const getQuotes = (table1: Table<FieldSet>) => {
 
 
 export async function GET (request: NextRequest){
-//   try {
+  try {
     const data = await getQuotes(table1);
     return NextResponse.json(data);
-//   }catch{
-//     // console.error(e);
-//     return NextResponse.error();
-// }
+  }catch{
+    // console.error(e);
+    return NextResponse.error();
+}
 }
