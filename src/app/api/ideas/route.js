@@ -1,15 +1,18 @@
 import { NextResponse } from 'next/server';
 import Airtable from 'airtable'
 
+
 const base = new Airtable({apiKey: process.env.API_KEY_ODB}).base('app5C3EKxBArX6f00')
-const table1 = base('Visionary voices');
 
-const getQuotes = (table1) => {
 
+const table2 = base('Creative Catalyst');
+
+
+const getIdeas = (table2) => {
     return new Promise((resolve, reject) => {
-        table1 && table1.select({
+        table2.select({
             view: 'Grid view',
-            fields: ['author name', 'Author Headshots', 'What he did', 'Quote']
+            fields: ['Heading' ,'Description']
         }).firstPage((err, records) => {
             if (err) {
                 console.error(err);
@@ -17,10 +20,8 @@ const getQuotes = (table1) => {
             } else {
                 const data = records.map(record => ({
                     id: record.id,
-                    name: record.get('author name'),
-                    image: record.get('Author Headshots'),
-                    desc: record.get('What he did'),
-                    quote: record.get('Quote')
+                    heading: record.get('Heading'),
+                    idea: record.get('Description')
                 }));
                 resolve(data);
             }
@@ -29,12 +30,11 @@ const getQuotes = (table1) => {
 }
 
 export async function GET(req, res) {
-
-    // try {
-        const data = await getQuotes(table1);
+    try {
+        const data = await getIdeas(table2);
         return NextResponse.json(data);
-    // } catch (e) {
-    //     console.error(e);
-    //     return NextResponse.error(new Error(e.message));
-    // }
+    } catch (e) {
+        console.error(e);
+        return NextResponse.error(new Error(e.message));
+    }
 }
