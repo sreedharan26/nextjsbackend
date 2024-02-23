@@ -1,5 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import Airtable, { FieldSet, Table } from 'airtable'
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const base = new Airtable({apiKey: process.env.API_KEY_ODB}).base('app5C3EKxBArX6f00')
 const table1 = base('Visionary voices');
