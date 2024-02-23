@@ -37,8 +37,9 @@ export async function GET (request: NextRequest){
     return NextResponse.json(data);
   }catch(e){
     // console.error(e);
-    const response = NextResponse.next()
-    response.cookies.set('error', `${e}`)
-    return response
+    // const response = NextResponse.next()
+    // response.cookies.set('error', `${e}`)
+    // return response
+    return NextResponse.json({message : "Something went wrong"})
 }
 }
