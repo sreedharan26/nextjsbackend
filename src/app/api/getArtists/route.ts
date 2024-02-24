@@ -14,7 +14,7 @@ const headers = {
     Authorization: `Bearer ${API_KEY}`,
 }
 
-const fieldsToRetrieve = ['author name', 'Author Headshots', 'What he did', 'Quote'];
+const fieldsToRetrieve = ['author name', 'Author Headshots', 'What he did', 'Daily Schedule'];
 
 const fetchQuotes = async () => {
     try{
